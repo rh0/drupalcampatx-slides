@@ -133,13 +133,35 @@
         </section>
 
         <section>
-          <h1>notification.module</h1>
+          <h1>nodejs_notify</h1>
         </section>
 
         <section>
-          <pre><code data-trim>
-/* Example of sending a message using notification module with php. */
-          </code></pre>
+          <section>
+            <h2>Send a message to all users.</h2>
+            <pre><code data-trim>
+$subject = "To all users:";
+$body = "Hello World!";
+nodejs_broadcast_message($subject, $body);
+            </code></pre>
+          </section>
+          <section>
+            <h2>A Closer look.</h2>
+            <pre><code data-trim>
+function nodejs_broadcast_message($subject, $body) {
+  $message = (object) array(
+    'broadcast' => TRUE,
+    'data' => (object) array(
+      'subject' => $subject,
+      'body' => $body,
+    ),
+    'channel' => 'nodejs_notify',
+  );
+  nodejs_enqueue_message($message);
+}
+            </code></pre>
+            <h4>nodejs.module</h4>
+          </section>
         </section>
 
         <section>
@@ -151,16 +173,30 @@
             <h2>d.o/project/messagejs</h2>
           </section>
           <section>
-            <h2>Assign users to a channel based on permissions.</h2>
+            <h2>hook_nodejs_user_channels()</h2>
             <pre><code data-trim>
-              /* lines of interest assigning channel */
+function messagejs_nodejs_user_channels($auth_user) {
+  $channels = array();
+  if (user_access('receive messagejs notifications', $auth_user)) {
+    $channels[] = 'messagejs_general';
+  }
+  return $channels;
+}
             </code></pre>
             <h4>messagejs.module</h4>
           </section>
           <section>
-            <h2>Send a message across the channel.</h2>
+            <h2>Send a message to channel subscribers.</h2>
             <pre><code data-trim>
-              /* lines of interest pushing messages */
+function messagejs_send_message($body, $subject = '') {
+  $notification = new stdClass();
+  $notification->channel = 'messagejs_general';
+  $notification->data['subject'] = $subject;
+  $notification->data['body'] = $body;
+  $notification->callback = 'nodejsNotify';
+
+  nodejs_enqueue_message($notification);
+}
             </code></pre>
             <h4>messagejs.module</h4>
           </section>
@@ -179,6 +215,17 @@ function swapit_demo_nodejs_handlers_info() {
     drupal_get_path('module', 'swapit_demo').'/swapit_demo.client.js',
   );
 }
+            </code></pre>
+            <h4>swapit_demo.module</h4>
+          </section>
+          <section>
+            <h2>Build and send the message object.</h2>
+            <pre><code data-trim>
+$message = new stdClass();
+$message->channel = 'swapit_demo';
+$message->data['body'] = $user_msg;
+$message->callback = 'swapIt';
+nodejs_send_message($message);
             </code></pre>
             <h4>swapit_demo.module</h4>
           </section>
