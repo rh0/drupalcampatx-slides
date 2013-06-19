@@ -208,7 +208,10 @@ function messagejs_send_message($body, $subject = '') {
 
         <section>
           <section>
-            <h2>hook_nodejs_handlers_info()</h2>
+            <h3><code>http://github.com/rh0/swapit_demo</code></h3>
+          </section>
+          <section>
+            <h3><code>hook_nodejs_handlers_info()</code></h3>
             <pre><code data-trim>
 function swapit_demo_nodejs_handlers_info() {
   return array(
@@ -246,7 +249,7 @@ Drupal.Nodejs.callbacks.swapIt = {
         </section>
 
         <section>
-          <h2>demo.theoleschool.com/swap</h2>
+          <h3><code>http://demo.theoleschool.com/swap</code></h3>
         </section>
 
         <section data-state="soothe">
@@ -263,43 +266,187 @@ Drupal.Nodejs.callbacks.swapIt = {
         <!-- SECTION II -->
 
         <section>
-          <h1>But what if I want to Node too?</h1>
+          <h1>I want to have my Drupal and Node it too!</h1>
         </section>
 
         <section>
-          <h1>Server Extensions... Get your Node on!</h1>
+          <h1>Server Extensions</h1>
+          <h2>They let you get your Node on!</h2>
           <h4><code>nodejs/nodejs.server.extension.js.example</code><h4>
         </section>
 
         <section>
+          <h2>The config object is here to help.</h2>
+          <pre><code data-trim>
+exports.setup = function (config) {
+...
+}
+          </code></pre>
+          <ul>
+            <li class="fragment"><code>config.publishMessageToClient();</code></li>
+            <li class="fragment"><code>config.publishMessageToChannel();</code></li>
+            <li class="fragment"><code>config.sendMessageToBackend();</code></li>
+          </ul>
+        </section>
+
+        <section>
           <section>
-            <h2>Look in the config object.</h2>
-            <pre><code data-trim>
-  exports.setup = function (config) {
-  ...
-  }
-            </code></pre>
+            <h2>Callbacks</h2>
+            <h3><code>process.on</code></h3>
             <ul>
-              <li class="fragment"><code>config.publishMessageToClient();</code></li>
-              <li class="fragment"><code>config.publishMessageToChannel();</code></li>
-              <li class="fragment"><code>config.sendMessageToBackend();</code></li>
+              <li class="fragment"><code>client-connection</code></li>
+              <li class="fragment"><code>client-authenticated</code></li>
+              <li class="fragment"><code>client-message</code></li>
+              <li class="fragment"><code>client-disconnect</code></li>
             </ul>
           </section>
           <section>
-            <h2>process.on events</h2>
+            <h2>A client has connected, do something!</h2>
             <pre><code data-trim>
-  process.on('client-connection', function (sessionId) {
-    console.log('Example extension got connection event for session ' + sessionId);
-    publishMessageToClient(sessionId, {data: {subject: 'Example extension', body: 'Hello, you just connected.'}});
-  })
+process.on('client-connection', function (sessionId) {
+  console.log('... got connection event for session ' + sessionId);
+  config.publishMessageToClient(sessionId, {
+    data: {
+      subject: 'Example extension',
+      body: 'Hello, you just connected.'
+      }
+    }
+  );
+})
             </code></pre>
+            <p><code>nodejs/nodejs.server.extension.js.example</code></p>
           </section>
         </section>
 
+        <section>
+          <h1>Is there anybody out there?</h1>
+        </section>
+
+        <section>
+          <section>
+            <h2>Talk back through socket.io</h2>
+            <h4><code>Drupal.Nodejs.socket.emit()</code></h4>
+          </section>
+          <section>
+            <h3>Decide what to say.</h3>
+            <pre><code data-trim>
+  var message = {
+    type: 'nodeToDrupal',
+    messageBody: 'Hello from the client side!'
+  };
+            </code></pre>
+            <div class="fragment">
+              <h3>Then Say it</h3>
+              <pre><code data-trim>
+  $("#node-to-drupal-form").submit(function() {
+    Drupal.Nodejs.socket.emit('message', message);
+    return false;
+  });
+              </code></pre>
+            </div>
+            <p><code>node_to_drupal.client.js</code></p>
+          </section>
+        </section>
+
+        <section>
+          <h2>We've got a callback for that!</h2>
+          <pre><code data-trim>
+exports.setup = function (config) {
+process.on('client-message', function (sessionId, message) {
+  console.log('Got a message from the client.  Take a look: ');
+  console.log(message);
+  // Do some stuff ...
+          </code></pre>
+          <div class="fragment">
+            <h4>and can even respond</h4>
+            <pre><code>
+  config.publishMessageToClient(sessionId, {
+    data: {
+      subject: 'Success',
+      body: "Huzzah!"
+    }
+  });
+}
+};
+            </code></pre>
+          </div>
+          <p><code>node_to_drupal.server.extension.js</code></p>
+        </section>
+
+        <section>
+          <h1>Are you there Drupal? It's me Node.js.</h1>
+        </section>
+        <section>
+          <h4><code>http://github.com/rh0/node_to_drupal</code></h4>
+        </section>
+
+        <section>
+          <section>
+            <h2>Drupal needs to know what to expect.</h2>
+          </section>
+          <section>
+            <h4><code>hook_nodejs_message_callback()</code></h4>
+            <pre><code>
+function node_to_drupal_nodejs_message_callback($type) {
+  switch($type) {
+    case 'nodeToDrupal':
+      return array('node_to_drupal_handler');
+  }
+  return false;
+}
+            </code></pre>
+            <div class="fragment">
+              <h4>which defines our handler</h4>
+              <pre><code>
+function node_to_drupal_handler($message, &$responce) {
+  $message_body = $message['messageBody'];
+  watchdog('node_to_drupal', $message_body, array(), WATCHDOG_INFO);
+  $responce = 'Message logged to Watchdog!';
+}
+              </code></pre>
+            </div>
+            <p><code>node_to_drupal.module</code></p>
+          </section>
+        </section>
+
+        <section>
+          <section>
+            <h2>Yep, it's a callback.</h2>
+            <h4><code>config.sendMessageToBackend()</code></h4>
+          </section>
+          <section>
+            <h2>Specify the message type</h2>
+            <pre><code>
+message.messageType = 'nodeToDrupal';
+            </code></pre>
+            <div class="fragment">
+              <h3>Send the message to Drupal.</h3>
+              <pre><code>
+config.sendMessageToBackend(message, function(error, responce, body) {
+  if(error) {
+    console.log('Error sending message to backend.', error);
+    return;
+  }
+  console.log('Response from drupal: ', body);
+});
+              </code></pre>
+            </div>
+          </section>
+        </section>
+
+        <section data-state="soothe">
+          <h2>So what does this mean?</h2>
+          <ul>
+            <li class="fragment">Server extensions allow us to augment the default node server.</li>
+            <li class="fragment">There are several useful callbacks at our disposal.</li>
+            <li class="fragment">The config object is your friend</li>
+            <li class="fragment">The client can talk to the node server using <code>Drupal.NodeJS.socket.emit()</code></li>
+            <li class="fragment">The Node server can talk to Drupal using <code>config.sendMessageToBackend</code> with a message targeted to a custom drupal handler.</li>
+          </ul>
+        </section>
 
 
-
-
+        <!-- Example stuff from reveal.js -->
 
 				<section id="transitions">
 					<h2>Transition Styles</h2>
