@@ -260,6 +260,47 @@ Drupal.Nodejs.callbacks.swapIt = {
           </ul>
         </section>
 
+        <!-- SECTION II -->
+
+        <section>
+          <h1>But what if I want to Node too?</h1>
+        </section>
+
+        <section>
+          <h1>Server Extensions... Get your Node on!</h1>
+          <h4><code>nodejs/nodejs.server.extension.js.example</code><h4>
+        </section>
+
+        <section>
+          <section>
+            <h2>Look in the config object.</h2>
+            <pre><code data-trim>
+  exports.setup = function (config) {
+  ...
+  }
+            </code></pre>
+            <ul>
+              <li class="fragment"><code>config.publishMessageToClient();</code></li>
+              <li class="fragment"><code>config.publishMessageToChannel();</code></li>
+              <li class="fragment"><code>config.sendMessageToBackend();</code></li>
+            </ul>
+          </section>
+          <section>
+            <h2>process.on events</h2>
+            <pre><code data-trim>
+  process.on('client-connection', function (sessionId) {
+    console.log('Example extension got connection event for session ' + sessionId);
+    publishMessageToClient(sessionId, {data: {subject: 'Example extension', body: 'Hello, you just connected.'}});
+  })
+            </code></pre>
+          </section>
+        </section>
+
+
+
+
+
+
 				<section id="transitions">
 					<h2>Transition Styles</h2>
 					<p>
