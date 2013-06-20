@@ -40,10 +40,10 @@
 				<section>
 					<h1>HELLO.</h1>
           <div class="fragment">
-            <h4><code>theoleschool.com</code></h4>
-            <h4><code>d.o/user/114058</code></h4>
-            <h4><code>twitter.com/rho_</code></h4>
-            <h4><code>github.com/rh0</code></h4>
+            <code>theoleschool.com</code><br>
+            <code>d.o/user/114058</code><br>
+            <code>twitter.com/rho_</code><br>
+            <code>github.com/rh0</code><br>
           </div>
 				</section>
 
@@ -160,7 +160,7 @@ function nodejs_broadcast_message($subject, $body) {
   nodejs_enqueue_message($message);
 }
             </code></pre>
-            <h4>nodejs.module</h4>
+            <code>nodejs.module</code>
           </section>
         </section>
 
@@ -183,7 +183,7 @@ function messagejs_nodejs_user_channels($auth_user) {
   return $channels;
 }
             </code></pre>
-            <h4>messagejs.module</h4>
+            <code>messagejs.module</code>
           </section>
           <section>
             <h2>Send a message to channel subscribers.</h2>
@@ -198,7 +198,7 @@ function messagejs_send_message($body, $subject = '') {
   nodejs_enqueue_message($notification);
 }
             </code></pre>
-            <h4>messagejs.module</h4>
+            <code>messagejs.module</code>
           </section>
         </section>
 
@@ -208,7 +208,7 @@ function messagejs_send_message($body, $subject = '') {
 
         <section>
           <section>
-            <h3><code>http://github.com/rh0/swapit_demo</code></h3>
+            <code>http://github.com/rh0/swapit_demo</code>
           </section>
           <section>
             <h3><code>hook_nodejs_handlers_info()</code></h3>
@@ -219,7 +219,7 @@ function swapit_demo_nodejs_handlers_info() {
   );
 }
             </code></pre>
-            <h4>swapit_demo.module</h4>
+            <code>swapit_demo.module</code>
           </section>
           <section>
             <h2>Build and send the message object.</h2>
@@ -230,7 +230,7 @@ $message->data['body'] = $user_msg;
 $message->callback = 'swapIt';
 nodejs_send_message($message);
             </code></pre>
-            <h4>swapit_demo.module</h4>
+            <code>swapit_demo.module</code>
           </section>
           <section>
             <h2>Client side callback gets the message</h2>
@@ -244,12 +244,12 @@ Drupal.Nodejs.callbacks.swapIt = {
   }
 };
             </code></pre>
-            <h4>swapit_demo.client.js</h4>
+            <code>swapit_demo.client.js</code>
           </section>
         </section>
 
         <section>
-          <h3><code>http://demo.theoleschool.com/swap</code></h3>
+          <code>http://demo.theoleschool.com/swap</code>
         </section>
 
         <section data-state="soothe">
@@ -272,7 +272,7 @@ Drupal.Nodejs.callbacks.swapIt = {
         <section>
           <h1>Server Extensions</h1>
           <h2>They let you get your Node on!</h2>
-          <h4><code>nodejs/nodejs.server.extension.js.example</code><h4>
+          <code>nodejs/nodejs.server.extension.js.example</code>
         </section>
 
         <section>
@@ -292,7 +292,7 @@ exports.setup = function (config) {
         <section>
           <section>
             <h2>Callbacks</h2>
-            <h3><code>process.on</code></h3>
+            <h3 style="text-transform: lowercase;"><code>process.on</code></h3>
             <ul>
               <li class="fragment"><code>client-connection</code></li>
               <li class="fragment"><code>client-authenticated</code></li>
@@ -325,7 +325,7 @@ process.on('client-connection', function (sessionId) {
         <section>
           <section>
             <h2>Talk back through socket.io</h2>
-            <h4><code>Drupal.Nodejs.socket.emit()</code></h4>
+            <code>Drupal.Nodejs.socket.emit()</code>
           </section>
           <section>
             <h3>Decide what to say.</h3>
