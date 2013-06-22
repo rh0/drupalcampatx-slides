@@ -83,29 +83,29 @@
             <h1>Authentication</h1>
           </section>
           <section>
-            <img class="tri-auth" src="auth-1.png" />
-            <ol>
+            <img style="float: left; width: 50%; margin-right: 7%" class="tri-auth" src="auth-1.png" />
+            <ol style="float: left; width: 40%; margin: 0;">
               <li>Normal Drupal page load. (with auth token)</li>
             </ol>
           </section>
           <section>
-            <img class="tri-auth" src="auth-2.png" />
-            <ol>
+            <img style="float: left; width: 50%; margin-right: 7%" class="tri-auth" src="auth-2.png" />
+            <ol style="float: left; width: 40%; margin: 0;">
               <li>Normal Drupal page load. (with auth token)</li>
               <li>Socket.io asks for a connection using the auth token.</li>
             </ol>
           </section>
           <section>
-            <img class="tri-auth" src="auth-3.png" />
-            <ol>
+            <img style="float: left; width: 50%; margin-right: 7%" class="tri-auth" src="auth-3.png" />
+            <ol style="float: left; width: 40%; margin: 0;">
               <li>Normal Drupal page load. (with auth token)</li>
               <li>Socket.io asks for a connection using the auth token.</li>
               <li>Node.js sends the auth token to drupal.</li>
             </ol>
           </section>
           <section>
-            <img class="tri-auth" src="auth-4.png" />
-            <ol>
+            <img style="float: left; width: 50%; margin-right: 7%" class="tri-auth" src="auth-4.png" />
+            <ol style="float: left; width: 40%; margin: 0;">
               <li>Normal Drupal page load. (with auth token)</li>
               <li>Socket.io asks for a connection using the auth token.</li>
               <li>Node.js sends the auth token to drupal.</li>
@@ -113,8 +113,8 @@
             </ol>
           </section>
           <section>
-            <img class="tri-auth" src="auth-5.png" />
-            <ol>
+            <img style="float: left; width: 50%; margin-right: 7%" class="tri-auth" src="auth-5.png" />
+            <ol style="float: left; width: 40%; margin: 0;">
               <li>Normal Drupal page load. (with auth token)</li>
               <li>Socket.io asks for a connection using the auth token.</li>
               <li>Node.js sends the auth token to drupal.</li>
@@ -173,7 +173,7 @@ function nodejs_broadcast_message($subject, $body) {
             <h2>d.o/project/messagejs</h2>
           </section>
           <section>
-            <h2>hook_nodejs_user_channels()</h2>
+            <h3 style="text-transform: lowercase"><code>hook_nodejs_user_channels()</code></h3>
             <pre><code data-trim>
 function messagejs_nodejs_user_channels($auth_user) {
   $channels = array();
@@ -211,7 +211,7 @@ function messagejs_send_message($body, $subject = '') {
             <code>http://github.com/rh0/swapit_demo</code>
           </section>
           <section>
-            <h3><code>hook_nodejs_handlers_info()</code></h3>
+            <h3 style="text-transform: lowercase"><code>hook_nodejs_handlers_info()</code></h3>
             <pre><code data-trim>
 function swapit_demo_nodejs_handlers_info() {
   return array(
@@ -377,7 +377,7 @@ process.on('client-message', function (sessionId, message) {
           <h1>Are you there Drupal? It's me Node.js.</h1>
         </section>
         <section>
-          <h4><code>http://github.com/rh0/node_to_drupal</code></h4>
+          <h4 style="text-transform: lowercase;"><code>http://github.com/rh0/node_to_drupal</code></h4>
         </section>
 
         <section>
@@ -385,7 +385,7 @@ process.on('client-message', function (sessionId, message) {
             <h2>Drupal needs to know what to expect.</h2>
           </section>
           <section>
-            <h4><code>hook_nodejs_message_callback()</code></h4>
+            <h4 style="text-transform: lowercase"><code>hook_nodejs_message_callback()</code></h4>
             <pre><code>
 function node_to_drupal_nodejs_message_callback($type) {
   switch($type) {
@@ -396,7 +396,7 @@ function node_to_drupal_nodejs_message_callback($type) {
 }
             </code></pre>
             <div class="fragment">
-              <h4>which defines our handler</h4>
+              <h4>which defines a handler</h4>
               <pre><code>
 function node_to_drupal_handler($message, &$responce) {
   $message_body = $message['messageBody'];
@@ -412,7 +412,7 @@ function node_to_drupal_handler($message, &$responce) {
         <section>
           <section>
             <h2>Yep, it's a callback.</h2>
-            <h4><code>config.sendMessageToBackend()</code></h4>
+            <code>config.sendMessageToBackend()</code>
           </section>
           <section>
             <h2>Specify the message type</h2>
@@ -445,187 +445,85 @@ config.sendMessageToBackend(message, function(error, responce, body) {
           </ul>
         </section>
 
+        <!-- Section III -->
 
-        <!-- Example stuff from reveal.js -->
+        <section>
+          <img src="all-the-things.jpg" />
+        </section>
 
-				<section id="transitions">
-					<h2>Transition Styles</h2>
-					<p>
-						You can select from different transitions, like: <br>
-						<a href="?transition=cube#/transitions">Cube</a> -
-						<a href="?transition=page#/transitions">Page</a> -
-						<a href="?transition=concave#/transitions">Concave</a> -
-						<a href="?transition=zoom#/transitions">Zoom</a> -
-						<a href="?transition=linear#/transitions">Linear</a> -
-						<a href="?transition=fade#/transitions">Fade</a> -
-						<a href="?transition=none#/transitions">None</a> -
-						<a href="?#/transitions">Default</a>
-					</p>
-				</section>
+        <section>
+          <code>https://github.com/rh0/dchess</code>
+        </section>
 
-				<section id="themes">
-					<h2>Themes</h2>
-					<p>
-						Reveal.js comes with a few themes built in: <br>
-						<a href="?theme=sky#/themes">Sky</a> -
-						<a href="?theme=beige#/themes">Beige</a> -
-						<a href="?theme=simple#/themes">Simple</a> -
-						<a href="?theme=serif#/themes">Serif</a> -
-						<a href="?theme=night#/themes">Night</a> -
-						<a href="?#/themes">Default</a>
-					</p>
-					<p>
-						<small>
-							* Theme demos are loaded after the presentation which leads to flicker. In production you should load your theme in the <code>&lt;head&gt;</code> using a <code>&lt;link&gt;</code>.
-						</small>
-					</p>
-				</section>
+        <section>
+          <h1>Content Token Channels</h1>
+        </section>
 
-				<section>
-					<section data-state="alert">
-						<h2>Global State</h2>
-						<p>
-							Set <code>data-state="something"</code> on a slide and <code>"something"</code>
-							will be added as a class to the document element when the slide is open. This lets you
-							apply broader style changes, like switching the background.
-						</p>
-						<a href="#" class="image navigate-down">
-							<img width="178" height="238" src="https://s3.amazonaws.com/hakim-static/reveal-js/arrow.png" alt="Down arrow">
-						</a>
-					</section>
-					<section data-state="blackout">
-						<h2>"blackout"</h2>
-						<a href="#" class="image navigate-down">
-							<img width="178" height="238" src="https://s3.amazonaws.com/hakim-static/reveal-js/arrow.png" alt="Down arrow">
-						</a>
-					</section>
-					<section data-state="soothe">
-						<h2>"soothe"</h2>
-						<a href="#" class="image navigate-next">
-							<img width="178" height="238" src="https://s3.amazonaws.com/hakim-static/reveal-js/arrow.png" alt="Up arrow" style="-webkit-transform: rotate(-90deg);">
-						</a>
-					</section>
-				</section>
+        <section>
+          <h2>Setup channel in Drupal</h2>
+          <pre><code>
+nodejs_send_content_channel_token('dchess_game_' . $node->nid);
+          </code></pre>
+        </section>
 
-				<section data-state="customevent">
-					<h2>Custom Events</h2>
-					<p>
-						Additionally custom events can be triggered on a per slide basis by binding to the <code>data-state</code> name.
-					</p>
-					<pre><code data-trim contenteditable style="font-size: 18px; margin-top: 20px;">
-Reveal.addEventListener( 'customevent', function() {
-	console.log( '"customevent" has fired' );
-} );
-					</code></pre>
-				</section>
+        <section>
+          <section>
+            <h2>Token channel message from drupal.</h2>
+            <pre><code>
+nodejs_send_content_channel_message($message);
+            </code></pre>
+          </section>
+          <section>
+            <h2>Token channel message from node</h2>
+            <pre><code>
+function sendMessageToTokenChannel(message, config) {
+  if (!message.hasOwnProperty('channel')) {
+    console.log('... invalid message object was provided.');
+    return;
+  }
+  if (!config.tokenChannels.hasOwnProperty(message.channel)) {
+    console.log('... channel "' + message.channel + '" doesn\'t exist.');
+    return;
+  }
 
-				<section>
-					<h2>Clever Quotes</h2>
-					<p>
-						These guys come in two forms, inline: <q cite="http://searchservervirtualization.techtarget.com/definition/Our-Favorite-Technology-Quotations">
-						&ldquo;The nice thing about standards is that there are so many to choose from&rdquo;</q> and block:
-					</p>
-					<blockquote cite="http://searchservervirtualization.techtarget.com/definition/Our-Favorite-Technology-Quotations">
-						&ldquo;For years there has been a theory that millions of monkeys typing at random on millions of typewriters would
-						reproduce the entire works of Shakespeare. The Internet has proven this theory to be untrue.&rdquo;
-					</blockquote>
-				</section>
-
-				<section>
-					<h2>Pretty Code</h2>
-					<pre><code data-trim contenteditable>
-function linkify( selector ) {
-  if( supports3DTransforms ) {
-
-    var nodes = document.querySelectorAll( selector );
-
-    for( var i = 0, len = nodes.length; i &lt; len; i++ ) {
-      var node = nodes[i];
-
-      if( !node.className ) ) {
-        node.className += ' roll';
-      }
-    };
+  for (var socketId in config.tokenChannels[message.channel].sockets) {
+    config.publishMessageToClient(socketId, message);
   }
 }
-					</code></pre>
-					<p>Courtesy of <a href="http://softwaremaniacs.org/soft/highlight/en/description/">highlight.js</a>.</p>
-				</section>
+            </code></pre>
+            <code>dchess.server.js</code>
+          </section>
+        </section>
 
-				<section>
-					<h2>Intergalactic Interconnections</h2>
-					<p>
-						You can link between slides internally,
-						<a href="#/2/3">like this</a>.
-					</p>
-				</section>
+        <section>
+          <code>http://chess.theoleschool.com</code>
+        </section>
 
-				<section>
-					<section>
-						<h2>Fragmented Views</h2>
-						<p>Hit the next arrow...</p>
-						<p class="fragment">... to step through ...</p>
-						<ol>
-							<li class="fragment"><code>any type</code></li>
-							<li class="fragment"><em>of view</em></li>
-							<li class="fragment"><strong>fragments</strong></li>
-						</ol>
+        <section>
+          <h2>A few things to note</h2>
+          <ul>
+            <li class="fragment"><code>https://github.com/jhlywa/chess.js</code></li>
+            <li class="fragment"><code>http://angularjs.org/</code></li>
+          </ul>
+        </section>
 
-						<aside class="notes">
-							This slide has fragments which are also stepped through in the notes window.
-						</aside>
-					</section>
-					<section>
-						<h2>Fragment Styles</h2>
-						<p>There's a few styles of fragments, like:</p>
-						<p class="fragment grow">grow</p>
-						<p class="fragment shrink">shrink</p>
-						<p class="fragment roll-in">roll-in</p>
-						<p class="fragment fade-out">fade-out</p>
-						<p class="fragment highlight-red">highlight-red</p>
-						<p class="fragment highlight-green">highlight-green</p>
-						<p class="fragment highlight-blue">highlight-blue</p>
-					</section>
-				</section>
+        <section data-state="soothe">
+          <h1>Some last thoughts</h1>
+          <p class="fragment">Works great with pushing messagesto the client.</p>
+          <p class="fragment">You can build more complex node applicaitons with this...</p>
+          <p class="fragment">but should you?</p>
+        </section>
+        <!-- Thanks -->
 
-				<section>
-					<h2>Spectacular image!</h2>
-					<a class="image" href="http://lab.hakim.se/meny/" target="_blank">
-						<img width="320" height="299" src="http://s3.amazonaws.com/hakim-static/portfolio/images/meny.png" alt="Meny">
-					</a>
-				</section>
-
-				<section>
-					<h2>Export to PDF</h2>
-					<p>Presentations can be <a href="https://github.com/hakimel/reveal.js#pdf-export">exported to PDF</a>, below is an example that's been uploaded to SlideShare.</p>
-					<iframe id="slideshare" src="http://www.slideshare.net/slideshow/embed_code/13872948" width="455" height="356" style="margin:0;overflow:hidden;border:1px solid #CCC;border-width:1px 1px 0;margin-bottom:5px" allowfullscreen> </iframe>
-					<script>
-						document.getElementById('slideshare').attributeName = 'allowfullscreen';
-					</script>
-				</section>
-
-				<section>
-					<h2>Take a Moment</h2>
-					<p>
-						Press b or period on your keyboard to enter the 'paused' mode. This mode is helpful when you want to take distracting slides off the screen
-						during a presentation.
-					</p>
-				</section>
-
-				<section>
-					<h2>Where you can find me</h2>
-					<ul>
-            <h3>theoleschool.com</h3>
-            <h3>drupal.org/user/114058</h3>
-            <h3>github.com/rh0</h3>
-            <h3>twitter.com/rho_</h3>
-					</ul>
-				</section>
-
-				<section>
-					<h1>THE END</h1>
-					<h3>BY Hakim El Hattab / hakim.se</h3>
-				</section>
+        <section>
+          <h1>Thanks</h1>
+          <div class="fragment">
+            <code>theoleschool.com</code><br>
+            <code>d.o/user/114058</code><br>
+            <code>twitter.com/rho_</code><br>
+            <code>github.com/rh0</code><br>
+          </div>
+        </section>
 
 			</div>
 
